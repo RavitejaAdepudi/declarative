@@ -1,27 +1,37 @@
-pipeline {
+pipeline
+ {
     agent any
 
-    stages {
-        stage ('Compile Stage') {
+    stages 
+{
+        stage ('Compile Stage') 
+{
 
-            steps {
-                
-                    sh 'mvn -f mavewebappdemo/pom.xml clean install'
-                
+            steps
+ {
+                withMaven(maven : 'maven_3_5_0')
+ {
+                    sh 'mvn clean install'
+                }
             }
         }
 
-        stage ('Testing Stage') {
+        stage ('Testing Stage')
+ {
 
-            steps {
-                
-                    sh 'mvn -f mavewebappdemo/pom.xml  test'
-                
+            steps
+ {
+                withMaven(maven : 'maven_3_5_0') 
+{
+                    sh 'mvn test'
+                }
             }
         }
-        stage('Deploy to Tomcat'){
-        steps {
-        sh 'cp -r /root/.jenkins/workspace/project2/mavewebappdemo/target/* /opt/apache-tomcat-8.5.3/webapps/'
+        stage('Deploy to Tomcat')
+{
+        steps
+ {
+        sh 'cp -r /root/.jenkins/workspace/vasaviproj/target/* /opt/apache-tomcat-8.5.29/webapps/'
         }
         }
 
