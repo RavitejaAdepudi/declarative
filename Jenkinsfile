@@ -11,7 +11,7 @@ pipeline
  {
                 withMaven(maven : 'maven_3_5_0')
  {
-                    sh 'mvn clean install'
+                    sh 'mvn -f mavewebappdemo/pom.xml clean install'
                 }
             }
         }
